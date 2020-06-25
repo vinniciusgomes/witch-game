@@ -27,6 +27,8 @@
 
 Criação de um jogo utilizando Javascript na semana da #ImersãoGameDev da Alura.
 
+A Imersão Game Dev tem como objetivo criar um jogo 2D utilizando JavaScript. Foi utilizado a biblioteca P5.js, está biblioteca possui uma quantidade de funcionalidades relacionadas a renderização de imagens e objetos no navegador. A ideia da imersão é criar um jogo do 0 utilizando o mínimo possível de bibliotecas, e sem a utilização de Engines.
+
 📦 O download completo de todas as sprites, podem ser encontradas em: [
 PIPOYA FREE 2D Game Character Sprites](https://pipoya.itch.io/pipoya-free-2d-game-character-sprites)
 
