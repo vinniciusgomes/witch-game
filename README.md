@@ -1,6 +1,6 @@
 <p align="center"><img width="150" src=".github/witch.gif"></p>
 
-<h1 align="center">#ImersaoGameDev<br><img src="https://img.shields.io/github/repo-size/mesquini/imersao-game-dev"> <img src="https://img.shields.io/github/last-commit/mesquini/imersao-game-dev"> <img src="https://img.shields.io/github/license/mesquini/imersao-game-dev"></h1>
+<h1 align="center">#ImersaoGameDev<br><img src="https://img.shields.io/github/repo-size/vinniciusgomes/witch-game"> <img src="https://img.shields.io/github/last-commit/vinniciusgomes/witch-game"> <img src="https://img.shields.io/github/license/vinniciusgomes/witch-game"></h1>
 
 ## 🔖 Descrição
 
