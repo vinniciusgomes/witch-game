@@ -1,43 +1,57 @@
 class Personagem extends Animacao {
-  constructor(matriz, imagem, x, largura, altura, larguraSprite, alturaSprite) {
-    super(matriz, imagem, x, largura, altura, larguraSprite, alturaSprite);
+  constructor(
+    matriz,
+    imagem,
+    posicaoX,
+    posicaoY,
+    larguraPersonagem,
+    alturaPersonagem,
+    larguraSprite,
+    alturaSprite
+  ) {
+    super(
+      matriz,
+      imagem,
+      posicaoX,
+      posicaoY,
+      larguraPersonagem,
+      alturaPersonagem,
+      larguraSprite,
+      alturaSprite
+    );
 
-    this.yInicial = height - altura;
-    this.y = this.yInicial;
-    this.velocidadeDoPulo = 0;
+    this.alturaInicial = posicaoY;
+    this.velocidadePulo = 0;
     this.gravidade = 3;
+    this.pulos = 2;
   }
 
-  pula() {
-    this.velocidadeDoPulo = -33;
+  pula(somPulo) {
+    if (this.pulos > 0) {
+      somPulo.play();
+      this.velocidadePulo = -30;
+      this.pulos--;
+    }
   }
 
   aplicaGravidade() {
-    this.y = this.y + this.velocidadeDoPulo;
-    this.velocidadeDoPulo = this.velocidadeDoPulo + this.gravidade;
+    this.posicaoY += this.velocidadePulo;
+    this.velocidadePulo += this.gravidade;
 
-    if (this.y > this.yInicial) {
-      this.y = this.yInicial
+    if (this.posicaoY > this.alturaInicial) {
+      this.posicaoY = this.alturaInicial;
+      this.pulos = 2;
     }
   }
 
   estaColidindo(inimigo) {
-    noFill();
-    // rect(this.x, this.y, this.largura, this.altura);
-    // rect(inimigo.x, inimigo.y, inimigo.largura, inimigo.altura);
-    const precisao = 0.7;
-    const colisao = collideRectRect(
-      this.x,
-      this.y,
-      this.largura * precisao,
-      this.altura * precisao,
-      inimigo.x,
-      inimigo.y,
-      inimigo.largura * precisao,
-      inimigo.altura * precisao
+    return collideCircleCircle(
+      this.posicaoX + this.larguraPersonagem / 2,
+      this.posicaoY + this.alturaPersonagem / 2,
+      this.larguraPersonagem * 0.9,
+      inimigo.posicaoX + inimigo.larguraPersonagem / 2,
+      inimigo.posicaoY + inimigo.alturaPersonagem / 2,
+      inimigo.larguraPersonagem / 2
     );
-
-    return colisao;
   }
-
 }

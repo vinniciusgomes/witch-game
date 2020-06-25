@@ -1,103 +1,191 @@
-let imagemCenario;
+let imagemCenario_1;
+let imagemCenario_2;
+let imagemCenario_3;
+let imagemCenario_4;
+let imagemCenario_5;
+
 let imagemPersonagem;
 let imagemInimigo;
+let imagemTroll;
+let imagemTrollFeio;
+let imagemGotinhaVoadora;
+let matrizGotinha;
+
+let matrizPersonagem;
+let matrizTroll;
+let matrizTrollFeio;
+let matrizGotinhaVoadora;
+
+let somPulo;
+let somInicio;
+let somGameOver;
+
 let imagemGameOver;
+let imagemTelaInicial;
+
 let cenario;
 let somDoJogo;
-let somDoPulo;
-let somMorte;
 let personagem;
+let inimigo;
+let inimigoTroll;
+let inimigoGotinhaVoadora;
+let inimigoTrollFeio;
 
-const matrizInimigo = [
-  [0, 0],
-  [104, 0],
-  [208, 0],
-  [312, 0],
-  [0, 104],
-  [104, 104],
-  [208, 104],
-  [312, 104],
-  [0, 208],
-  [104, 208],
-  [208, 208],
-  [312, 208],
-  [0, 312],
-  [104, 312],
-  [208, 312],
-  [312, 312],
-  [0, 418],
-  [104, 418],
-  [208, 418],
-  [312, 418],
-  [0, 522],
-  [104, 522],
-  [208, 522],
-  [312, 522],
-  [0, 626],
-  [104, 626],
-  [208, 626],
-  [312, 626],
-]
-const matrizPersonagem = [
-  [0, 0],
-  [220, 0],
-  [440, 0],
-  [660, 0],
-  [0, 270],
-  [220, 270],
-  [440, 270],
-  [660, 270],
-  [0, 540],
-  [220, 540],
-  [440, 540],
-  [660, 540],
-  [0, 810],
-  [220, 810],
-  [440, 810],
-  [660, 810],
-];
-let jump = 0
+let controladorInimigo;
+let controladorPontuacao;
+let controladorGame;
 
 function preload() {
-  imagemCenario = loadImage("imagens/cenario/floresta.png");
+  imagemCenario_1 = loadImage("imagens/cenario/BG_Decor.png");
+  imagemCenario_2 = loadImage("imagens/cenario/Foreground.png");
+  imagemCenario_3 = loadImage("imagens/cenario/Middle_Decor.png");
+  imagemCenario_4 = loadImage("imagens/cenario/Sky.png");
+  imagemCenario_5 = loadImage("imagens/cenario/Ground.png");
   imagemPersonagem = loadImage("imagens/personagem/correndo.png");
   imagemInimigo = loadImage("imagens/inimigos/gotinha.png");
+  imagemTroll = loadImage("imagens/inimigos/troll.png");
+  imagemTrollFeio = loadImage("imagens/inimigos/troll_01_andando.png");
+  imagemGotinhaVoadora = loadImage("imagens/inimigos/dropy-flying.png");
   imagemGameOver = loadImage("imagens/assets/game-over.png");
   somDoJogo = loadSound("sons/trilha_jogo.mp3");
-  somDoPulo = loadSound("sons/somPulo.mp3");
-  somMorte = loadSound("sons/som_morte.mp3");
+  somPulo = loadSound("sons/somPulo.mp3");
+  somGameOver = loadSound("sons/game-over-sound-effect.mp3");
+  somInicio = loadSound("sons/somInicio.mp3");
+  imagemTelaInicial = loadImage("imagens/assets/tela-inicial.png");
 }
 
 function setup() {
+  introSetup();
   createCanvas(windowWidth, windowHeight);
-  cenario = new Cenario(imagemCenario, 3);
-  personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 110, 135, 220, 270);
-  inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 52, 52, 104, 104);
+  cenario = new Cenario(
+    [
+      imagemCenario_1,
+      imagemCenario_2,
+      imagemCenario_3,
+      imagemCenario_4,
+      imagemCenario_5,
+    ],
+    3
+  );
+
+  matrizGotinha = new MatrizPersonagem(104, 104, 4, 4);
+  inimigo = new Inimigo(
+    matrizGotinha,
+    imagemInimigo,
+    width - 52,
+    height - 85,
+    52,
+    52,
+    104,
+    104,
+    false,
+    8
+  );
+
+  matrizTroll = new MatrizPersonagem(480, 480, 5, 6, 28);
+  inimigoTroll = new Inimigo(
+    matrizTroll,
+    imagemTroll,
+    width,
+    height - 190,
+    200,
+    200,
+    480,
+    480,
+    false,
+    8
+  );
+
+  matrizGotinhaVoadora = new MatrizPersonagem(200, 150, 3, 6, 16);
+  inimigoGotinhaVoadora = new Inimigo(
+    matrizGotinhaVoadora,
+    imagemGotinhaVoadora,
+    width,
+    height - 270,
+    100,
+    75,
+    200,
+    150,
+    true,
+    8
+  );
+
+  matrizTrollFeio = new MatrizPersonagem(822, 557, 7, 1);
+  inimigoTrollFeio = new Inimigo(
+    matrizTrollFeio,
+    imagemTrollFeio,
+    width,
+    height - 570 / 3,
+    822 / 3,
+    557 / 3,
+    822,
+    557,
+    false,
+    8
+  );
+
+  controladorInimigo = new ControladorInimigo([
+    inimigo,
+    inimigoTroll,
+    inimigoGotinhaVoadora,
+    inimigoTrollFeio,
+  ]);
+
+  matrizPersonagem = new MatrizPersonagem(220, 270, 4, 4);
+  personagem = new Personagem(
+    matrizPersonagem,
+    imagemPersonagem,
+    15,
+    height - 170,
+    110,
+    135,
+    220,
+    270
+  );
+
   frameRate(40);
-  somDoJogo.loop();
+  controladorGame = new ControladorGame();
+  controladorPontuacao = new ControladorPontuacao();
 }
 
-function keyPressed() {
-  if (key === "ArrowUp" || key === ' ') {
-    somDoPulo.play();
-    personagem.pula();
-  }
+function introSetup() {
+  somInicio.loop();
 }
 
 function draw() {
-  cenario.exibe();
-  cenario.move();
+  if (controladorGame.status == 0) {
+    image(imagemTelaInicial, 0, 0, width, height);
+  } else {
+    cenario.exibe();
+    controladorPontuacao.exibe();
 
-  personagem.exibe();
-  personagem.aplicaGravidade();
+    cenario.exibeGrama();
 
-  inimigo.exibe();
-  inimigo.move();
+    controladorInimigo.exibe();
 
-  if (personagem.estaColidindo(inimigo)) {
-    somDoJogo.stop();
-    image(imagemGameOver, width / 2 - 200, height / 3);
-    somMorte.play();
-    noLoop();
+    personagem.exibe();
+    personagem.aplicaGravidade();
+
+    if (personagem.estaColidindo(controladorInimigo.inimigo)) {
+      somDoJogo.stop();
+      noLoop();
+      somGameOver.play();
+      image(imagemGameOver, width / 2 - 206, height / 2 - 39, 412, 78);
+    }
+
+    controladorPontuacao.adicionarPonto();
+    controladorInimigo.move();
+
+    cenario.move();
+  }
+}
+
+function keyPressed() {
+  if (key === "ArrowUp" || key === " ") {
+    personagem.pula(somPulo);
+  } else if (key === "Enter" && controladorGame.status == 0) {
+    controladorGame.alteraStatus(1);
+    somInicio.stop();
+    somDoJogo.loop();
   }
 }
