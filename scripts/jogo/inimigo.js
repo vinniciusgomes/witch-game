@@ -1,26 +1,6 @@
 class Inimigo extends Animacao {
-  constructor(
-    matriz,
-    imagem,
-    posicaoX,
-    posicaoY,
-    larguraPersonagem,
-    alturaPersonagem,
-    larguraSprite,
-    alturaSprite,
-    isVoador,
-    velociadeMinima
-  ) {
-    super(
-      matriz,
-      imagem,
-      posicaoX,
-      posicaoY,
-      larguraPersonagem,
-      alturaPersonagem,
-      larguraSprite,
-      alturaSprite
-    );
+  constructor(matriz, imagem, posicaoX, posicaoY, larguraPersonagem, alturaPersonagem, larguraSprite, alturaSprite, isVoador, velociadeMinima) {
+    super(matriz, imagem, posicaoX, posicaoY, larguraPersonagem, alturaPersonagem, larguraSprite, alturaSprite);
     this.velocidadeMinima = velociadeMinima;
     this.velocidade = velociadeMinima;
     this.isVoador = isVoador;

@@ -1,14 +1,6 @@
 class Animacao {
-  constructor(
-    matriz,
-    imagem,
-    posicaoX,
-    posicaoY,
-    larguraPersonagem,
-    alturaPersonagem,
-    larguraSprite,
-    alturaSprite
-  ) {
+
+  constructor(matriz, imagem, posicaoX, posicaoY, larguraPersonagem, alturaPersonagem, larguraSprite, alturaSprite) {
     this.imagem = imagem;
     this.larguraPersonagem = larguraPersonagem;
     this.alturaPersonagem = alturaPersonagem;
@@ -21,17 +13,7 @@ class Animacao {
   }
 
   exibe() {
-    image(
-      this.imagem,
-      this.posicaoX,
-      this.posicaoY,
-      this.larguraPersonagem,
-      this.alturaPersonagem,
-      this.matriz.posicaoX(this.frameAtual),
-      this.matriz.posicaoY(this.frameAtual),
-      this.larguraSprite,
-      this.alturaSprite
-    );
+    image(this.imagem, this.posicaoX, this.posicaoY, this.larguraPersonagem, this.alturaPersonagem, this.matriz.posicaoX(this.frameAtual), this.matriz.posicaoY(this.frameAtual), this.larguraSprite, this.alturaSprite);
     this.anima();
   }
 
@@ -41,4 +23,5 @@ class Animacao {
       this.frameAtual = 0;
     }
   }
+
 }

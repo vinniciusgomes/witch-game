@@ -1,4 +1,5 @@
 class ControladorInimigo {
+
   constructor(listaInimigo) {
     //console.log('Criou controlador');
     this.listaInimigo = listaInimigo;
@@ -16,19 +17,17 @@ class ControladorInimigo {
       this.inimigo.posicaoX = width;
       this.inimigo.mudaVelocidade();
       if (this.inimigo.isVoador) {
-        this.inimigo.posicaoY =
-          height - (Math.floor(Math.random() * 250) + 100);
+        this.inimigo.posicaoY = height - (Math.floor(Math.random() * 250) + 100);
       }
     }
   }
 
   sorteiaInimigo() {
-    return this.listaInimigo[
-      Math.floor(Math.random() * this.listaInimigo.length)
-    ];
+    return this.listaInimigo[Math.floor(Math.random() * this.listaInimigo.length)];
   }
 
   exibe() {
     this.inimigo.exibe();
   }
+
 }

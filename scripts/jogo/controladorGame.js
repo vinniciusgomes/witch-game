@@ -6,4 +6,5 @@ class ControladorGame {
   alteraStatus(status) {
     this.status = status;
   }
+
 }

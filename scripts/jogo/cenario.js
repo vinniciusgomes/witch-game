@@ -77,11 +77,12 @@ class Cenario {
     }
 
     if (this.x14 <= -width) {
-      this.x14 = this.x24 + width;
+      this.x14 = this.x24 + width;;
     }
 
     if (this.x24 <= -width) {
-      this.x24 = this.x14 + width;
+      this.x24 = this.x14 + width;;
     }
+
   }
 }
